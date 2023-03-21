@@ -1,0 +1,38 @@
+{% extends 'patients/base.html' %}
+{% load static %}
+{% block content %}
+<div class="mx-auto max-w-md">
+    <h1 class="text-3xl font-bold mb-4">{{ patient.name }} {{ patient.surname }}</h1>
+    <dl class="grid grid-cols-2 gap-2">
+        <dt class="font-bold">Date of Birth:</dt>
+        <dd>{{ patient.date_of_birth }}</dd>
+        <dt class="font-bold">Age:</dt>
+        <dd>{{ patient.age }}</dd>
+        <dt class="font-bold">Weight:</dt>
+        <dd>{{ patient.weight }} kg</dd>
+        <dt class="font-bold">Height:</dt>
+        <dd>{{ patient.height }} cm</dd>
+        <dt class="font-bold">Address:</dt>
+        <dd>{{ patient.address }}</dd>
+        <dt class="font-bold">CEP:</dt>
+        <dd>{{ patient.cep }}</dd>
+        <dt class="font-bold">City:</dt>
+        <dd>{{ patient.city }}</dd>
+        <dt class="font-bold">Country:</dt>
+        <dd>{{ patient.country }}</dd>
+        <dt class="font-bold">Phone:</dt>
+        <dd>{{ patient.phone }}</dd>
+    </dl>
+    <div class="mt-4 flex justify-between">
+        <a href="{% url 'patient_edit' patient.pk %}"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Edit
+        </a>
+        <form method="post" action="{% url 'patient_delete' patient.pk %}">
+            {% csrf_token %}
+            <input type="submit" value="Delete"
+                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        </form>
+    </div>
+</div>
+{% endblock %}
