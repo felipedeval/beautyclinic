@@ -6,40 +6,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Cadastro de Pacientes{% endblock %}</title>
-    <link href="{% static 'css/tailwind.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 
-<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+<body>
 
     <!-- Navigation -->
-    <nav class="bg-gray-900 p-2 mt-0 fixed w-full z-10 top-0">
-        <div class="container mx-auto flex flex-wrap items-center">
-            <div class="flex w-full md:w-1/2 justify-center md:justify-start text-white font-extrabold">
-                <a class="text-white no-underline hover:text-white hover:no-underline" href="/">
-                    <span class="text-2xl pl-2"><i class="em em-grinning"></i> Cadastro de Pacientes</span>
-                </a>
-            </div>
-            <div class="flex w-full justify-end md:w-1/2 md:justify-end">
-                <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
-                    <li class="mr-3">
-                        <a class="inline-block py-2 px-4 text-white no-underline" href="#">Home</a>
-                    </li>
-                    <li class="mr-3">
-                        <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
-                            href="#">Sobre</a>
-                    </li>
-                </ul>
-            </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="/">
+            <i class="em em-grinning"></i> In'Corpore
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Prontuários</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Agendamentos</a>
+                </li>
+            </ul>
         </div>
     </nav>
 
     <!-- Content -->
-    <div class="container mx-auto mt-20">
+    <div class="container-fluid">
         {% block content %}
         {% endblock %}
-        {% include 'patients/partials/_footer.html' %}
     </div>
 
+    {% include 'patients/partials/_footer.html' %}
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </body>
+
 
 </html>

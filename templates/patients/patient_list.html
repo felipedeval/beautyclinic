@@ -1,23 +1,45 @@
 {% extends 'patients/base.html' %}
 {% load static %}
 {% block content %}
-<div class="mx-auto max-w-md">
-    <h1 class="text-3xl font-bold mb-4">Patient List</h1>
-    <div class="flex justify-end mb-4">
-        <a href="{% url 'patient_create' %}"
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-            Add Patient
+<div class="container mt-5">
+    <h1 class="text-3xl mb-4" style="margin-top: 100px">Lista de Pacientes</h1>
+    <div class="d-flex justify-content-end mb-4">
+        <a href="{% url 'patient_create' %}" class="btn btn-primary">
+            Novo Paciente
         </a>
     </div>
-    <ul class="divide-y divide-gray-400">
-        {% for patient in patients %}
-        <li class="py-4">
-            <a href="{% url 'patient_detail' patient.pk %}"
-                class="text-lg text-blue-500 font-semibold hover:underline">{{ patient.name }} {{ patient.surname }}</a>
-        </li>
-        {% empty %}
-        <li>No patients yet.</li>
-        {% endfor %}
-    </ul>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patients %}
+            <tr>
+                <td>{{ patient.pk }}</td>
+                <td>{{ patient.name }}</td>
+                <td>{{ patient.surname }}</td>
+                <td>{{ patient.phone }}</td>
+                <td>
+                    <a href="{% url 'patient_detail' patient.pk %}" class="btn btn-primary btn-sm">View</a>
+                    <a href="{% url 'patient_edit' patient.pk %}" class="btn btn-secondary btn-sm">Edit</a>
+                    <form method="post" action="{% url 'patient_delete' patient.pk %}">
+                        {% csrf_token %}
+                        <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No patients yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}
